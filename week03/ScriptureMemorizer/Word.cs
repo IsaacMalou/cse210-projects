@@ -1,5 +1,3 @@
-using System;
-
 public class Word
 {
     private string _text;
@@ -8,30 +6,34 @@ public class Word
     public Word(string text)
     {
         _text = text;
-        // Words are visible by default when created
-        _isHidden = false;
+        _isHidden = false; // Words are visible by default
     }
 
     public void Hide()
     {
-        // TODO: Set _isHidden to true
+        _isHidden = true;
     }
 
     public void Show()
     {
-        // TODO: Set _isHidden to false
+        _isHidden = false;
     }
 
     public bool IsHidden()
     {
-        // TODO: Return the _isHidden value
-        return false;
+        return _isHidden;
     }
 
     public string GetDisplayText()
     {
-        // TODO: If _isHidden is true, return underscores matching the length of _text.
-        // Otherwise, return the actual _text.
-        return "";
+        if (_isHidden)
+        {
+            // Creates a string of underscores exactly matching the length of the word
+            return new string('_', _text.Length);
+        }
+        else
+        {
+            return _text;
+        }
     }
 }

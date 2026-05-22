@@ -11,24 +11,65 @@ public class Scripture
         _reference = reference;
         _words = new List<Word>();
 
-        // TODO: Split the 'text' string by spaces and create a new Word object for each piece,
-        // then add it to the _words list.
+        // Split the text string by spaces and convert them into Word objects
+        string[] splitText = text.Split(' ');
+        foreach (string wordText in splitText)
+        {
+            _words.Add(new Word(wordText));
+        }
     }
 
     public void HideRandomWords(int numberToHide)
     {
-        // TODO: Randomly select words from the _words list and call their Hide() method.
+        Random random = new Random();
+
+        // Stretch Challenge: Filter to only words that are NOT hidden yet
+        List<Word> unhiddenWords = new List<Word>();
+        foreach (Word word in _words)
+        {
+            if (!word.IsHidden())
+            {
+                unhiddenWords.Add(word);
+            }
+        }
+
+        // If there are fewer unhidden words than the number we want to hide, 
+        // just hide whatever is left.
+        int wordsToHide = Math.Min(numberToHide, unhiddenWords.Count);
+
+        for (int i = 0; i < wordsToHide; i++)
+        {
+            // Pick a random word from the unhidden list
+            int randomIndex = random.Next(unhiddenWords.Count);
+            unhiddenWords[randomIndex].Hide();
+
+            // Remove it from our temporary unhidden list so we don't pick it again in this loop
+            unhiddenWords.RemoveAt(randomIndex);
+        }
     }
 
     public string GetDisplayText()
     {
-        // TODO: Combine the reference display text and all the word display texts into one string.
-        return "";
+        string scriptureText = "";
+        foreach (Word word in _words)
+        {
+            scriptureText += word.GetDisplayText() + " ";
+        }
+
+        // Combine Reference and the assembled scripture text
+        return $"{_reference.GetDisplayText()} {scriptureText.Trim()}";
     }
 
     public bool IsCompletelyHidden()
     {
-        // TODO: Check if every word in the _words list is hidden.
-        return false;
+        // Check if every single word in the list is hidden
+        foreach (Word word in _words)
+        {
+            if (!word.IsHidden())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

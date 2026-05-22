@@ -1,5 +1,3 @@
-using System;
-
 public class Reference
 {
     private string _book;
@@ -13,10 +11,10 @@ public class Reference
         _book = book;
         _chapter = chapter;
         _verse = verse;
-        _endVerse = verse; // If it's a single verse, the start and end are the same
+        _endVerse = verse;
     }
 
-    // Constructor for multiple verses
+    // Constructor for a range of verses
     public Reference(string book, int chapter, int startVerse, int endVerse)
     {
         _book = book;
@@ -27,7 +25,15 @@ public class Reference
 
     public string GetDisplayText()
     {
-        // TODO: Format and return the reference (e.g., "John 3:16" or "Proverbs 3:5-6")
-        return "";
+        // If the start and end verse are the same, format as "John 3:16"
+        if (_verse == _endVerse)
+        {
+            return $"{_book} {_chapter}:{_verse}";
+        }
+        // Otherwise, format as "Proverbs 3:5-6"
+        else
+        {
+            return $"{_book} {_chapter}:{_verse}-{_endVerse}";
+        }
     }
 }
