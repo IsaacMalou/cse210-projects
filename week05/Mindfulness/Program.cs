@@ -1,6 +1,6 @@
 using System;
 
-// EXCEEDING REQUIREMENTS:                                                              // <--- The Comment
+// EXCEEDING REQUIREMENTS:       
 // I added a feature to keep a log of how many times activities were performed. 
 // It tracks the count and displays a final message when the user quits.
 
@@ -8,7 +8,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        int activityCount = 0;                                                          // <--- Step 1: Create the variable here
+        int activityCount = 0;   // <--- Step 1: Create the variable here
 
         string choice = "";
 
@@ -27,7 +27,7 @@ class Program
             {
                 BreathingActivity breathing = new BreathingActivity();
                 breathing.Run();
-                activityCount++;                                                        // <--- Step 2: Add 1 for breathing
+                activityCount++;        // <--- Step 2: Add 1 for breathing
             }
             else if (choice == "2")
             {
@@ -36,7 +36,7 @@ class Program
 
                 Console.WriteLine("Reflecting Activity coming soon! Press Enter.");
                 Console.ReadLine();
-                // activityCount++;                                                     // (Uncomment this when Reflecting is built)
+                // activityCount++;      // (Uncomment this when Reflecting is built)
             }
             else if (choice == "3")
             {
@@ -45,11 +45,12 @@ class Program
 
                 Console.WriteLine("Listing Activity coming soon! Press Enter.");
                 Console.ReadLine();
-                // activityCount++;                                                     // (Uncomment this when Listing is built)
+                // activityCount++;     // (Uncomment this when Listing is built)
             }
         }
 
-        // Step 3: Print the final total after the while loop finishes                 // <--- Step 3: The final message
+        // Step 3: Print the final total after the while loop finishes                 
+        // <--- Step 3: The final message
         Console.WriteLine();
         Console.WriteLine($"Thank you for using the Mindfulness Program!");
         Console.WriteLine($"You completed {activityCount} activities this session.");
