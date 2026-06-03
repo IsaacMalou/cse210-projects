@@ -1,19 +1,30 @@
-// This means "BreathingActivity inherits from Activity"
+using System;
+
 public class BreathingActivity : Activity
 {
-    // This calls the Parent (Activity) constructor to set the name and description
-    public BreathingActivity() : base("Breathing Activity", "This activity will help you relax...")
+    public BreathingActivity() : base("Breathing Activity", "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.")
     {
     }
 
     public void Run()
     {
-        DisplayStartingMessage();  // Inherited from Parent
-        
-        // Put your specific breathing logic here (loops, breath in/out)
-        ShowCountDown(5);  // Inherited from Parent - Example of using the countdown for breathing in
-        ShowCountDown(5);  // Inherited from Parent - Example of using the countdown for breathing out
-            
-        DisplayEndingMessage();   // Inherited from Parent
+        DisplayStartingMessage();
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(_duration);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.WriteLine();
+            Console.Write("Breathe in...");
+            ShowCountDown(4);
+
+            Console.WriteLine();
+            Console.Write("Now breathe out...");
+            ShowCountDown(6);
+            Console.WriteLine();
+        }
+
+        DisplayEndingMessage();
     }
 }

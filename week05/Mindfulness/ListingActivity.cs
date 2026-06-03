@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class ListingActivity : Activity
@@ -7,12 +8,6 @@ public class ListingActivity : Activity
 
     public ListingActivity() : base("Listing Activity", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
     {
-    }
-
-    public void Run()
-    {
-        // Logic specific to Listing
-        DisplayStartingMessage();  // Inherited from Parent
         _prompts = new List<string>
         {
             "Who are people that you appreciate?",
@@ -23,6 +18,48 @@ public class ListingActivity : Activity
         };
     }
 
-    private string GetRandomPrompt() { return ""; }
-    private List<string> _listFromUser() { return new List<string>(); }
+    public void Run()
+    {
+        DisplayStartingMessage();
+
+        Console.WriteLine("List as many responses you can to the following prompt:");
+        Console.WriteLine($" --- {GetRandomPrompt()} ---");
+        Console.Write("You may begin in: ");
+        ShowCountDown(5);
+        Console.WriteLine();
+
+        List<string> userList = GetListFromUser();
+        _count = userList.Count;
+
+        Console.WriteLine($"You listed {_count} items!");
+
+        DisplayEndingMessage();
+    }
+
+    private string GetRandomPrompt()
+    {
+        Random random = new Random();
+        int index = random.Next(_prompts.Count);
+        return _prompts[index];
+    }
+
+    private List<string> GetListFromUser()
+    {
+        List<string> responses = new List<string>();
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(_duration);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("> ");
+            string response = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(response))
+            {
+                responses.Add(response);
+            }
+        }
+
+        return responses;
+    }
 }

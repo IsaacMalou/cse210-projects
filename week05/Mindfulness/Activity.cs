@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using System.Collections.Generic;
 
 public class Activity
 {
@@ -14,51 +16,56 @@ public class Activity
 
     public void DisplayStartingMessage()
     {
-        Console.WriteLine($"Welcome to the {_name}.");
+        Console.Clear();
+        Console.WriteLine($"Welcome to the {_name}.\n");
         Console.WriteLine(_description);
+        Console.WriteLine();
         Console.Write("How long, in seconds, would you like for your session? ");
         _duration = int.Parse(Console.ReadLine());
+
+        Console.Clear();
         Console.WriteLine("Get ready...");
         ShowSpinner(3);
     }
 
     public void DisplayEndingMessage()
     {
+        Console.WriteLine();
         Console.WriteLine("Well done!!");
         ShowSpinner(3);
-        Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
-        ShowSpinner(3);
+        Console.WriteLine($"\nYou have completed another {_duration} seconds of the {_name}.");
+        ShowSpinner(4);
     }
 
     public void ShowSpinner(int seconds)
     {
-        // Spinner logic
-        for (int i = 0; i < seconds; i++)
+        List<string> animationStrings = new List<string> { "|", "/", "-", "\\", "|", "/", "-", "\\" };
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(seconds);
+        int i = 0;
+
+        while (DateTime.Now < endTime)
         {
-            Console.Write("|");
-            System.Threading.Thread.Sleep(500);
+            string s = animationStrings[i];
+            Console.Write(s);
+            Thread.Sleep(250);
             Console.Write("\b \b");
-            Console.Write("/");
-            System.Threading.Thread.Sleep(500);
-            Console.Write("\b \b");
-            Console.Write("-");
-            System.Threading.Thread.Sleep(500);
-            Console.Write("\b \b");
-            Console.Write("\\");
-            System.Threading.Thread.Sleep(500);
-            Console.Write("\b \b");
+
+            i++;
+            if (i >= animationStrings.Count)
+            {
+                i = 0;
+            }
         }
     }
 
     public void ShowCountDown(int seconds)
     {
-        // Add your countdown logic here
         for (int i = seconds; i > 0; i--)
         {
             Console.Write(i);
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
             Console.Write("\b \b");
         }
-        Console.WriteLine();
     }
 }
