@@ -8,8 +8,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        int activityCount = 0;   // <--- Step 1: Create the variable here
-
+        int activityCount = 0;
         string choice = "";
 
         while (choice != "4")
@@ -27,32 +26,24 @@ class Program
             {
                 BreathingActivity breathing = new BreathingActivity();
                 breathing.Run();
-                activityCount++;        // <--- Step 2: Add 1 for breathing
+                activityCount++;
             }
             else if (choice == "2")
             {
-                // ReflectingActivity reflecting = new ReflectingActivity();
-                // reflecting.Run();
-
-                Console.WriteLine("Reflecting Activity coming soon! Press Enter.");
-                Console.ReadLine();
-                // activityCount++;      // (Uncomment this when Reflecting is built)
+                ReflectingActivity reflecting = new ReflectingActivity();
+                reflecting.Run();
+                activityCount++;
             }
             else if (choice == "3")
             {
-                // ListingActivity listing = new ListingActivity();
-                // listing.Run();
-
-                Console.WriteLine("Listing Activity coming soon! Press Enter.");
-                Console.ReadLine();
-                // activityCount++;     // (Uncomment this when Listing is built)
+                ListingActivity listing = new ListingActivity();
+                listing.Run();
+                activityCount++;
             }
         }
 
-        // Step 3: Print the final total after the while loop finishes                 
-        // <--- Step 3: The final message
-        Console.WriteLine();
-        Console.WriteLine($"Thank you for using the Mindfulness Program!");
+        Console.Clear();
+        Console.WriteLine("Thank you for using the Mindfulness Program!");
         Console.WriteLine($"You completed {activityCount} activities this session.");
         Console.WriteLine("Have a wonderful day!");
     }
