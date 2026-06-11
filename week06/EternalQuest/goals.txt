@@ -1,0 +1,4 @@
+0
+SimpleGoal:Give a Talk,Speak in Secrament Meating when asked,100,False
+EternalGoal:To study scripture,Study for at least 10 min,50
+ChecklistGoal:Attend the temple,Attend and preform any ordinance ,50,500,3,0
